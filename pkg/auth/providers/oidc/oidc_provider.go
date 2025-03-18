@@ -638,9 +638,9 @@ func parseACRFromAccessToken(accessToken string) (string, error) {
 	if !ok {
 		return "", errors.New("failed to parse claims in JWT token: invalid jwt.MapClaims format")
 	}
-	acrValue, found := claims["acr"].(string)
+	acrValue, found := claims["acr"]
 	if !found {
 		return "", fmt.Errorf("ACR claim invalid or not found in token: (acr=%v)", claims["acr"])
 	}
-	return acrValue, nil
+	return acrValue.(string), nil
 }
